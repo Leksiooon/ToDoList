@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Twoja ToDoList{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    Witaj {{ user.email }}
+
+{% endblock %}
