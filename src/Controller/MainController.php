@@ -42,4 +42,15 @@ class MainController extends AbstractController
     {
         return $this->render('security/registration.html.twig');
     }
+
+    /**
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboard()
+    {
+        $user = $this->getUser();
+        return $this->render('user/dashboard.html.twig',[
+            'user' => $user,
+        ]);
+    }
 }
