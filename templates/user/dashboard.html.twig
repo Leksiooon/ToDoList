@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block body %}
-    Witaj {{ user.email }}
+    Witaj {{ user.email }} <br/>
+    <a href="{{ path('myLists') }}">Moje listy!</a> <br/>
+    <a href="{{ path('logout') }}">Wyloguj</a>
 
 {% endblock %}

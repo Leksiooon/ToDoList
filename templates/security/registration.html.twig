@@ -3,6 +3,56 @@
 {% block title %}Rejestracja{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
+    <div class="wrapper">
+        {{ form_start(form,{'attr': {'novalidate':'novalidate','class':'needs-validation form-signin'}}) }}
+        <h1 class="h3 mb-3 font-weight-normal">Rejestracja</h1>
+
+        <label for="user_name">Imię</label>
+        {{ form_widget(form.name, {'attr': {'class':'form-control'}}) }}
+        <div class="error">
+            {{ form_errors(form.name) }}
+        </div>
+
+        <label for="user_last_name">Nazwisko</label>
+        {{ form_widget(form.last_name, {'attr': {'class':'form-control'}}) }}
+        <div class="error">
+            {{ form_errors(form.last_name) }}
+        </div>
+
+        <label for="user_name">Email</label>
+        {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+        <div class="error">
+            {{ form_errors(form.email) }}
+        </div>
+
+        <label for="user_password_first">Hasło</label>
+        {{ form_widget(form.password.first, {'attr': {'class':'form-control', 'required':'required'}}) }}
+        <div class="error">
+            {{ form_errors(form.password.first) }}
+        </div>
+
+        <label for="user_password_second">Powtórz hasło</label>
+        {{ form_widget(form.password.second, {'attr': {'class':'form-control', 'required': 'true'}}) }}
+        <div class="error">
+            {{ form_errors(form.password.second) }}
+        </div>
+
+        <hr class="mb-4">
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Rejestruj</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+
+    <link href="{{ asset('css/security/register.css') }}" type="text/css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('js/register.js') }}"></script>
+
+{% endblock %}
