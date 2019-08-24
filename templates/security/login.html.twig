@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/security/login.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper">
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'secutiry') }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{{ path('login') }}" class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Logowanie</h1>
+            <label for="inputEmail">Email</label>
+            <input type="email" name="_email" id="inputEmail" class="form-control" placeholder="Adress email" required autofocus>
+
+            <label for="inputPassword">Hasło</label>
+            <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+            <label class="checkbox">
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+        </form>
+    </div>
+
+{% endblock %}
