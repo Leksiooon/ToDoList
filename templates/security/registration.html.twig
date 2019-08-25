@@ -4,8 +4,12 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link href="{{ asset('css/security/register.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
     <div class="wrapper">
-        {{ form_start(form,{'attr': {'novalidate':'novalidate','class':'needs-validation form-signin'}}) }}
+        {{ form_start(form,{'attr': {'novalidate':'novalidate','class':'needs-validation form-signin','onsubmit':'return validateForm()'}}) }}
         <h1 class="h3 mb-3 font-weight-normal">Rejestracja</h1>
 
         <label for="user_name">Imię</label>
@@ -26,16 +30,18 @@
             {{ form_errors(form.email) }}
         </div>
 
-        <label for="user_password_first">Hasło</label>
-        {{ form_widget(form.password.first, {'attr': {'class':'form-control', 'required':'required'}}) }}
+        <label for="user_password">Hasło</label>
+        {{ form_widget(form.password.first, {'attr': {'class':'form-control'}}) }}
         <div class="error">
             {{ form_errors(form.password.first) }}
+            <ul><li><div id="error_password_first"></div></li></ul>
         </div>
 
         <label for="user_password_second">Powtórz hasło</label>
-        {{ form_widget(form.password.second, {'attr': {'class':'form-control', 'required': 'true'}}) }}
+        {{ form_widget(form.password.second, {'attr': {'class':'form-control'}}) }}
         <div class="error">
             {{ form_errors(form.password.second) }}
+            <ul><li><div id="error_password_second"></div></li></ul>
         </div>
 
         <hr class="mb-4">
@@ -45,13 +51,7 @@
     </div>
 {% endblock %}
 
-{% block body %}
-
-    <link href="{{ asset('css/security/register.css') }}" type="text/css" rel="stylesheet" />
-
-{% endblock %}
-
-{% block javascript %}
+{% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/register.js') }}"></script>
 
