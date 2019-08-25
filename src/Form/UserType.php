@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -19,11 +20,11 @@ class UserType extends AbstractType
             ->add('name', TextType::class)
             ->add('last_name', TextType::class)
             ->add('email', EmailType::class)
-            ->add('password', RepeatedType::class, array(
-                'type'=>PasswordType::class,
-                'required' => true
-            ))
-        ;
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'required' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
