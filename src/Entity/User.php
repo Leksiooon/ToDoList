@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -52,6 +54,16 @@ class User implements UserInterface
      * @Assert\NotBlank(message = "Valid last name is required.")
      */
     private $last_name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ToDoList", mappedBy="user", orphanRemoval=true)
+     */
+    private $toDoLists;
+
+    public function __construct()
+    {
+        $this->toDoLists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -151,6 +163,37 @@ class User implements UserInterface
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ToDoList[]
+     */
+    public function getToDoLists(): Collection
+    {
+        return $this->toDoLists;
+    }
+
+    public function addToDoList(ToDoList $toDoList): self
+    {
+        if (!$this->toDoLists->contains($toDoList)) {
+            $this->toDoLists[] = $toDoList;
+            $toDoList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeToDoList(ToDoList $toDoList): self
+    {
+        if ($this->toDoLists->contains($toDoList)) {
+            $this->toDoLists->removeElement($toDoList);
+            // set the owning side to null (unless already changed)
+            if ($toDoList->getUser() === $this) {
+                $toDoList->setUser(null);
+            }
+        }
 
         return $this;
     }
