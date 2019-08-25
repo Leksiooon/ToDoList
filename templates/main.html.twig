@@ -3,12 +3,9 @@
 {% block title %}Strona startowa{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
-
-    <div><h1>Strona główna!</h1></div>
-    <div><a href="{{ path('login') }}">Logowanie</a></div>
-    <div><a href="{{ path('registration') }}">Rejestracja</a></div>
 
 {% endblock %}
