@@ -1,14 +1,53 @@
-{% extends 'base.html.twig' %}
+{% extends 'user/baseUser.html.twig' %}
 
-{% block title %}Twoja ToDoList{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
+    <link href="{{ asset('') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
+
 {% block body %}
-    Witaj {{ user.email }} <br/>
-    <a href="{{ path('myLists') }}">Moje listy!</a> <br/>
-    <a href="{{ path('logout') }}">Wyloguj</a>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row justify-content-md-center">
+                <button type="button" id="buttonAddList" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Utwórz nową Listę Zadań</button>
+            </div>
+        </div>
+        <div class="col-md-4 offset-md-3">
+            <div class="boxoflists">
+                <h2>Twoje listy:</h2>
+                {% for list in lists %}
+                    <a href="{{ path('toDoList', {id: list.id}) }}" class="btn btn-dark">{{ list.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Utwórz nową listę zadań</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                {{ form_start(form) }}
+                    <div class="modal-body">
+                        <label for="form_name">Nazwa</label>
+                        {{ form_widget(form.name, {'attr': {'class':'form-control'}}) }}
+                        <label for="form_statuses">Status zadań</label>
+                        {{ form_widget(form.statuses, {'attr': {'class':'form-control'}}) }}
+                    </div>
+                    <div class="modal-footer">
+                        {{ form_widget(form.save, {'attr': {'class':'btn btn-primary'}}) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
