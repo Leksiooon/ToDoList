@@ -1,0 +1,58 @@
+{% extends 'user/baseUser.html.twig' %}
+
+{% block title %}Twoja ToDoList{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/user/toDoList.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row justify-content-md-center">
+                <h2>{{ toDoList.name }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-start">
+        {% for status in statuses %}
+            <div class="col">
+                <div class="status">
+                    {{ status.name }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="col">
+            <div class="box-add-status">
+                <button type="button" id="buttonAddStatus" class="btn" data-toggle="modal" data-target="#myModal">+ Dodaj nowy status</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dodaj nowy status</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                {{ form_start(formNewStatus) }}
+                <div class="modal-body">
+                    <label for="form_name">Nazwa</label>
+                    {{ form_widget(formNewStatus.name, {'attr': {'class':'form-control'}}) }}
+                </div>
+                <div class="modal-footer">
+                    {{ form_widget(formNewStatus.save, {'attr': {'class':'btn btn-primary'}}) }}
+                </div>
+                {{ form_end(formNewStatus) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

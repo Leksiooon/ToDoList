@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/user/dashboard.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
 
@@ -21,7 +21,7 @@
             <div class="boxoflists">
                 <h2>Twoje listy:</h2>
                 {% for list in lists %}
-                    <a href="{{ path('toDoList', {id: list.id}) }}" class="btn btn-dark">{{ list.name }}</a>
+                    <a href="{{ path('toDoList', {id: list.id}) }}" class="btn btn-dark btn-list">{{ list.name }}</a>
                 {% endfor %}
             </div>
         </div>

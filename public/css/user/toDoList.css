@@ -1,0 +1,18 @@
+.base-box {
+    background: none;
+}
+
+.col {
+    max-width: 200px;
+}
+
+.box-add-status {
+    border: 2px solid;
+    border-style: dotted;
+    border-radius: 5px;
+}
+
+.status {
+
+}
+

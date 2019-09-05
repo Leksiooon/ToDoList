@@ -1,7 +1,12 @@
 .base-box {
     background-image: url('/img/background.png');
-    min-height: 558px;
+    min-height: 561px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
 }

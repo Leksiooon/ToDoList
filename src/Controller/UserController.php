@@ -28,12 +28,13 @@ class UserController extends AbstractController
         $lists = $em->getRepository(ToDoList::class)->findBy(array('user' => $user));
 
 
-        //form for creating ToDoList
+        //form of creating ToDoList
         $form = $this->createFormBuilder()
             ->add('name')
             ->add('statuses', ChoiceType::class, [
                 'choices' => [
                     'Do zrobienia' => 'Do zrobienia',
+                    'W trakcie realizacji' => 'W trakcie realizacji',
                     'Zakończone' => 'Zakończone'
                 ],
                 'multiple' => true,
@@ -77,5 +78,47 @@ class UserController extends AbstractController
             'lists' => $lists
         ]);
     }
-    
+
+    /**
+     * @Route("/toDoList/{id}", name="toDoList")
+     */
+    public function toDoList(int $id, Request $request)
+    {
+        $toDoList = $this->getDoctrine()->getRepository(ToDoList::class)->find($id);
+
+        $statuses = $this->getDoctrine()->getRepository(Status::class)->findBy(
+            ['toDoLists' => $toDoList],
+            ['position' => 'ASC']
+        );
+
+        //form of add new statuses
+        $formNewStatus = $this->createFormBuilder()
+            ->add('name', TextType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $formNewStatus->handleRequest($request);
+
+        if($formNewStatus->isSubmitted() && $formNewStatus->isValid())
+        {
+            $status = new Status();
+            $status->create($formNewStatus['name']->getData(),$toDoList);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($status);
+            $em->flush($status);
+
+            return $this->redirectToRoute('toDoList', ['id' => $id ]);
+        }
+
+        return $this->render('user/toDoList.html.twig',[
+            'user' => $this->getUser(),
+            'toDoList' => $toDoList,
+            'statuses' => $statuses,
+            'formNewStatus' => $formNewStatus->createView()
+        ]);
+    }
+
+
 }
