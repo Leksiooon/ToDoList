@@ -115,10 +115,13 @@ class Status
         return $this;
     }
 
-    public function create(string $name, ToDoList $toDoList)
+    public function create(string $name, ToDoList $toDoList, $position = "null")
     {
         $this->setName($name);
         $this->setToDoLists($toDoList);
-        $this->setPosition($toDoList->getStatuses()->count());
+        if($position == "null")
+            $this->setPosition($toDoList->getStatuses()->count());
+        else
+            $this->setPosition($position);
     }
 }

@@ -10,11 +10,15 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="row justify-content-md-center">
-                <h2>{{ toDoList.name }}</h2>
-            </div>
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <h2>{{ toDoList.name }}</h2>
+        </div>
+        <div class="col-2 text-right">
+            <a href="{{ path('deleteToDoList', {id: toDoList.id}) }}">
+                <span class="glyphicon glyphicon-trash"></span>
+                Usuń listę
+            </a>
         </div>
     </div>
 
@@ -22,7 +26,27 @@
         {% for status in statuses %}
             <div class="col">
                 <div class="status">
-                    {{ status.name }}
+                    <div class="row name-status">
+                        <div class="col-sm-8">
+                            {{ status.name }}
+                        </div>
+                        <div class="col-sm-2">
+                            <a data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-option-horizontal"></span>
+                            </a>
+                            <div class="dropdown-menu">
+                                {#<a href="{{ path("") }}">Usuń status</a>#}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -54,5 +78,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
