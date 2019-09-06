@@ -29,7 +29,7 @@ class Status
     private $toDoLists;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="status")
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="status", orphanRemoval=true)
      */
     private $tasks;
 
@@ -62,7 +62,7 @@ class Status
 
     public function getToDoLists(): ?ToDoList
     {
-        return $this->ToDoLists;
+        return $this->toDoLists;
     }
 
     public function setToDoLists(?ToDoList $toDoLists): self

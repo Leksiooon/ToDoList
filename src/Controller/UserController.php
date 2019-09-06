@@ -30,7 +30,7 @@ class UserController extends AbstractController
 
         //form of creating ToDoList
         $form = $this->createFormBuilder()
-            ->add('name')
+            ->add('name',TextType::class)
             ->add('statuses', ChoiceType::class, [
                 'choices' => [
                     'Do zrobienia' => 'Do zrobienia',
@@ -52,8 +52,6 @@ class UserController extends AbstractController
             $todolist->setUser($user);
 
             $statuses = $form['statuses']->getData();
-
-
             if($statuses != null){
                 foreach ($statuses as $key=>$value)
                 {
@@ -63,7 +61,6 @@ class UserController extends AbstractController
                     $em->persist($status);
                 }
             }
-
 
             $em->persist($todolist);
             $em->flush();

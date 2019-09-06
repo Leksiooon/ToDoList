@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190905090730 extends AbstractMigration
+final class Version20190906194323 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20190905090730 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE status ADD position INT NOT NULL, CHANGE to_do_lists_id to_do_lists_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE status CHANGE to_do_lists_id to_do_lists_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE task CHANGE status_id status_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE users CHANGE roles roles JSON NOT NULL');
     }
@@ -32,7 +32,7 @@ final class Version20190905090730 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE status DROP position, CHANGE to_do_lists_id to_do_lists_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE status CHANGE to_do_lists_id to_do_lists_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE task CHANGE status_id status_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE users CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
     }
