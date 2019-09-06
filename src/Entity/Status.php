@@ -33,6 +33,11 @@ class Status
      */
     private $tasks;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -96,5 +101,27 @@ class Status
         }
 
         return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function create(string $name, ToDoList $toDoList, $position = "null")
+    {
+        $this->setName($name);
+        $this->setToDoLists($toDoList);
+        if($position == "null")
+            $this->setPosition($toDoList->getStatuses()->count());
+        else
+            $this->setPosition($position);
     }
 }

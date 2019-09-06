@@ -1,0 +1,36 @@
+.base-box {
+    background: none;
+}
+
+.col {
+    max-width: 300px;
+}
+
+.box-add-status {
+    border: 2px solid;
+    border-style: dotted;
+    border-radius: 5px;
+}
+
+.status {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #eeeeee;
+    min-height: 250px;
+}
+
+.name-status {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #999999;
+    text-align: center;
+}
+
+a {
+    color: black;
+    size: 5px;
+}
+
+.text-right {
+    text-align: right;
+}
