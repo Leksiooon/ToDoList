@@ -28,6 +28,7 @@ class ToDoListController extends AbstractController
             ['position' => 'ASC']
         );
 
+
         //form of add new statuses
         $formNewStatus = $this->createFormBuilder()
             ->add('name', TextType::class)

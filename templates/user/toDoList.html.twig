@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-sm-2">
                             <a data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-option-horizontal"></span>
+                                <span class="glyphicon glyphicon-option-horizontal cursor"></span>
                             </a>
                             <div class="dropdown-menu">
                                 <a href="{{ path("deleteStatus", {id: status.id}) }}">Usuń status</a>
@@ -45,7 +45,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        {#todo#}
+                        {% for task in status.tasks %}
+                            <div class="col-sm-12 task">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        {{ task.name }}
+                                    </div>
+                                    <div class="col-sm-4 options">
+                                        <div class="row">
+                                            <a href="#bannerformmodal" class="glyphicon glyphicon-chevron-left" data-toggle="modal" data-target="#bannerformmodal"></a>
+                                            <a data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-option-horizontal cursor"></span>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ path("deleteTask", {id: status.id}) }}">Usuń task</a>
+                                            </div>
+                                            <a href="#bannerformmodal" class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target="#bannerformmodal"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row task-description">
+                                    {{ task.description }}
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
