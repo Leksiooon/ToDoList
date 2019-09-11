@@ -53,14 +53,18 @@
                                     </div>
                                     <div class="col-sm-4 options">
                                         <div class="row">
-                                            <a href="#bannerformmodal" class="glyphicon glyphicon-chevron-left" data-toggle="modal" data-target="#bannerformmodal"></a>
+                                            {% if loop.parent.loop.first != status.position + 1 %}
+                                                <a href="{{ path('move', {id: task.id, move: 'left'}) }}" class="glyphicon glyphicon-chevron-left"></a>
+                                            {% endif %}
                                             <a data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-option-horizontal cursor"></span>
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a href="{{ path("deleteTask", {id: status.id}) }}">Usuń task</a>
+                                                <a href="{{ path("deleteTask", {id: task.id}) }}">Usuń task</a>
                                             </div>
-                                            <a href="#bannerformmodal" class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target="#bannerformmodal"></a>
+                                            {% if loop.parent.loop.last != status.position + 1 %}
+                                                <a href="{{ path('move', {id: task.id, move: 'right'}) }}" class="glyphicon glyphicon-chevron-right"></a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
